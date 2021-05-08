@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}edit{% endblock title %}
+
+{% block content %}
+
+
+{% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    {% endfor %}    
+{% endif %}
+
+</br>
+
+<form method="POST">
+  {% csrf_token %}
+    <div class="form-group">      
+      <input type="text" class="form-control" placeholder="{{ task_obj.task }}" value="{{ task_obj.task }}" name="task"> <!-- si no se pone "name" (con cualquier nombre), la forma (form) no funcionara.-->   
+      <input type="hidden" value="{{ task_obj.done }}" name="done">
+    </div>    
+    <button type="submit" class="btn btn-primary">Edit</button>
+</form>
+</br>
+
+{% endblock content %}
